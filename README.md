@@ -1,27 +1,27 @@
-# Apitribunal
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3.
+## Consumo de API - Datajud
 
-## Development server
+Este projeto é uma aplicação desenvolvida em Angular para consumir a API do Datajud, permitindo a interação e exibição de dados judiciais de forma eficiente e estruturada. O projeto integra a API do Datajud com funcionalidades de visualização e manipulação dos dados fornecidos pelos endpoints.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Características
 
-## Code scaffolding
+- **Consumo de API**: Integração direta com a API do Datajud.
+- **Visualização de Dados**: Exibe informações judiciais de forma organizada e acessível.
+- **Requisições HTTP**: Utilização de métodos GET e POST para manipulação de dados.
+- **Componentização**: Utilização de componentes Angular para modularidade e reutilização de código.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Funcionalidades
 
-## Build
+- **Consulta de Dados**: Permite realizar requisições para obter informações judiciais específicas.
+- **Filtragem**: Filtros aplicáveis para facilitar a busca e organização dos dados recebidos da API.
+- **Interface Responsiva**: Interface amigável e responsiva para facilitar o uso em diferentes dispositivos.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Endpoints e Consultas:
 
-## Running unit tests
+- Utilize a interface para realizar consultas específicas através da API.
+- O componente responsável pelo consumo de dados se encontra no serviço consumirapi.service.ts.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+### Licença
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Este projeto está sob a licença MIT. Consulte o arquivo <a href="https://github.com/alexandrefreitass/consumo-api-datajud/blob/main/LICENSE">LICENSE</a> para obter mais detalhes.
