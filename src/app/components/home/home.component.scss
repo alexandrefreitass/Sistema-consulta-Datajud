@@ -1,0 +1,90 @@
+@import "../../../color-variables.scss";
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.main-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 120px;
+    font-family: "Roboto", sans-serif;
+
+    span {
+        font-size: 20px;
+        font-weight: 700;
+        color: $secondary-text;
+    }
+    
+    h1 {
+        font-size: 56px;
+        font-weight: 900;
+        color: $primary-text;
+        line-height: 70px;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.benefit-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 100px;
+
+    .benefit-data {
+        border-bottom: 10px solid $secondary-color;
+        padding-bottom: 10px;
+
+        h2 {
+            font-size: 28px;
+            font-weight: 600;
+            font-family: "Roboto", sans-serif;
+            color: $primary-text;
+            margin: 0;
+            line-height: 1.3;
+        }
+    }
+
+    p {
+        font-size: 20px;
+        font-style: italic;
+        font-weight: 500;
+        
+
+        b {
+            background: -webkit-linear-gradient(180deg, $light-primary-color, $secondary-color); // Gradiente para o texto
+            -webkit-background-clip: text; // Recorta o fundo para o texto no Webkit
+            -webkit-text-fill-color: transparent; // Define o preenchimento do texto como transparente no Webkit
+            background-clip: text; // Recorta o fundo para o texto
+            color: transparent; // Garante que o texto seja transparente para o efeito de gradiente
+            font-style: normal;
+        }
+        
+    }
+}
+
+.cta-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .main-section {
+        flex-direction: row;
+    }
+    .benefit-section {
+        flex-direction: row;
+    }
+}
