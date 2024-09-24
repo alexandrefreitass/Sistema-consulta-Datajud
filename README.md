@@ -1,5 +1,10 @@
 
 ## Consumo de API - Datajud
+<br/>
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/b464a97a-b174-4a17-a9f6-fec1bab55424" />
+</div>
+<br/><br/>
 
 Este projeto é uma aplicação desenvolvida em Angular para consumir a API do Datajud, permitindo a interação e exibição de dados judiciais de forma eficiente e estruturada. O projeto integra a API do Datajud com funcionalidades de visualização e manipulação dos dados fornecidos pelos endpoints.
 
