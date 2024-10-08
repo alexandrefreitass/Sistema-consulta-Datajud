@@ -1,6 +1,5 @@
 [build]
   functions = "netlify/functions"
-  publish = "dist/apitribunal"
   command = "ng build"
 
 [[redirects]]
