@@ -26,7 +26,7 @@ export class DatajudService {
       }
     };
 
-    const apiUrl = `/api/${tribunalAlias}/_search`;
+    const apiUrl = `${this.apiUrl}/${tribunalAlias}/_search`;
 
     return this.http.post<any>(apiUrl, body, { headers: headers });
   }
