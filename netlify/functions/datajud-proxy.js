@@ -1,8 +1,8 @@
 const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
-  // Extrair os dados do corpo da requisição
-  const { numeroProcesso, tribunalAlias } = JSON.parse(event.body);
+  const numeroProcesso = event.queryStringParameters.numeroProcesso;
+  const tribunalAlias = event.queryStringParameters.tribunalAlias;
 
   const apiUrl = `https://api-publica.datajud.cnj.jus.br/${tribunalAlias}/_search`;
   
