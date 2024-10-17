@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
+import { tap, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +30,20 @@ export class DatajudService {
 
     const apiUrl = `${this.apiUrl}/${tribunalAlias}/_search`;
 
-    return this.http.post<any>(apiUrl, body, { headers: headers });
+    // Log da URL e do corpo da requisição
+    console.log('Enviando requisição para:', apiUrl);
+    console.log('Corpo da requisição:', body);
+
+    return this.http.post<any>(apiUrl, body, { headers: headers }).pipe(
+      tap((response) => {
+        // Log da resposta da API
+        console.log('Resposta da API:', response);
+      }),
+      catchError((error) => {
+        // Log do erro
+        console.error('Erro ao buscar o processo:', error);
+        return throwError(error);  // Re-emitir o erro para ser tratado posteriormente
+      })
+    );
   }
 }
