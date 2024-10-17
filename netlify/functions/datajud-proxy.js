@@ -4,7 +4,7 @@ exports.handler = async function(event, context) {
   const numeroProcesso = event.queryStringParameters.numeroProcesso;
   const tribunalAlias = event.queryStringParameters.tribunalAlias;
 
-  const apiUrl = `https://api-publica.datajud.cnj.jus.br/${tribunalAlias}/_search`;
+  const apiUrl = `https://api-publica.datajud.cnj.jus.br/api_publica_tjsp/_search`;
   
   const headers = {
     'Authorization': `ApiKey cDZHYzlZa0JadVREZDJCendQbXY6SkJlTzNjLV9TRENyQk1RdnFKZGRQdw==`,
