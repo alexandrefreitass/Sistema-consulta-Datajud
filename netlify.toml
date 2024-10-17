@@ -1,5 +1,5 @@
 [build]
-publish = "dist/apitribunal"  # Caminho de publicação
+publish = "dist/apitribunal/browser"  # Caminho de publicação
 functions = "netlify/functions"  # Caminho para as funções Lambda
 
 [[redirects]]
