@@ -8,26 +8,21 @@ import { tap, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DatajudService {
-  private apiKey = 'cDZHYzlZa0JadVREZDJCendQbXY6SkJlTzNjLV9TRENyQk1RdnFKZGRQdw=='; // Substitua <API Key> pela sua chave pública
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl;  // Aponta para o proxy configurado no Netlify
 
   constructor(private http: HttpClient) {}
 
   getProcesso(numeroProcesso: string, tribunalAlias: string): Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': `ApiKey ${this.apiKey}`,
       'Content-Type': 'application/json'
     });
 
     const body = {
-      query: {
-        match: {
-          numeroProcesso: numeroProcesso
-        }
-      }
+      numeroProcesso: numeroProcesso,
+      tribunalAlias: tribunalAlias
     };
 
-    const apiUrl = `${this.apiUrl}/${tribunalAlias}/_search`;
+    const apiUrl = `${this.apiUrl}`;
 
     // Log da URL e do corpo da requisição
     console.log('Enviando requisição para:', apiUrl);

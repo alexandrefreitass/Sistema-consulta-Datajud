@@ -1,10 +1,10 @@
 const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
-  const numeroProcesso = event.queryStringParameters.numeroProcesso;
-  const tribunalAlias = event.queryStringParameters.tribunalAlias;
+  // Extrair os dados do corpo da requisição
+  const { numeroProcesso, tribunalAlias } = JSON.parse(event.body);
 
-  const apiUrl = `https://api-publica.datajud.cnj.jus.br/api_publica_tjsp/_search`;
+  const apiUrl = `https://api-publica.datajud.cnj.jus.br/${tribunalAlias}/_search`;
   
   const headers = {
     'Authorization': `ApiKey cDZHYzlZa0JadVREZDJCendQbXY6SkJlTzNjLV9TRENyQk1RdnFKZGRQdw==`,
