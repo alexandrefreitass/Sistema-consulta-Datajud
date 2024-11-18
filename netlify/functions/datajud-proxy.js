@@ -1,39 +1,47 @@
-import fetch from 'node-fetch'; // Import do fetch em ES Modules
+let fetch;
 
-export async function handler(event, context) {
-  const { numeroProcesso, tribunalAlias } = JSON.parse(event.body); // Ajuste para extrair do `body`
+exports.handler = async function(event, context) {
+  if (!fetch) {
+    fetch = (await import('node-fetch')).default;
+  }
+
+  // Extrair parâmetros do corpo da requisição
+  const body = JSON.parse(event.body);
+  const numeroProcesso = body.numeroProcesso;
+  const tribunalAlias = body.tribunalAlias;
 
   const apiUrl = `https://api-publica.datajud.cnj.jus.br/${tribunalAlias}/_search`;
+
+  // Acessar a chave de API de uma variável de ambiente
+  const apiKey = process.env.DATAJUD_API_KEY; 
   const headers = {
-    'Authorization': `ApiKey cDZHYzlZa0JadVREZDJCendQbXY6SkJlTzNjLV9TRENyQk1RdnFKZGRQdw==`,
-    'Content-Type': 'application/json',
+    'Authorization': `ApiKey ${apiKey}`,
+    'Content-Type': 'application/json'
   };
 
-  const body = {
+  const requestBody = {
     query: {
       match: {
-        numeroProcesso: numeroProcesso,
-      },
-    },
+        numeroProcesso: numeroProcesso
+      }
+    }
   };
 
   try {
     const response = await fetch(apiUrl, {
       method: 'POST',
-      headers,
-      body: JSON.stringify(body),
+      headers: headers,
+      body: JSON.stringify(requestBody)
     });
-
     const data = await response.json();
     return {
       statusCode: 200,
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     };
   } catch (error) {
-    console.error('Erro na função Lambda:', error.message);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Erro ao processar a requisição.' }),
+      body: JSON.stringify({ error: 'Erro ao buscar o processo.' })
     };
   }
-}
+};
