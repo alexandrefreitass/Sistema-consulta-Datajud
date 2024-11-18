@@ -1,8 +1,8 @@
 [build]
-publish = "dist/apitribunal/browser"  # Caminho de publicação
-functions = "netlify/functions"  # Caminho para as funções Lambda
+  publish = "dist/apitribunal/browser"
+  functions = "netlify/functions"
 
 [[redirects]]
-from = "/api/*"
-to = "/.netlify/functions/datajud-proxy"
-status = 200
+  from = "/api/*"
+  to = "/.netlify/functions/datajud-proxy"
+  status = 200

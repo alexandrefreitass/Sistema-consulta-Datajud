@@ -1,12 +1,11 @@
 let fetch;
 
-exports.handler = async function(event, context) {
+export async function handler (event, context) {
   if (!fetch) {
     fetch = (await import('node-fetch')).default;
   }
 
-  const numeroProcesso = event.queryStringParameters.numeroProcesso;
-  const tribunalAlias = event.queryStringParameters.tribunalAlias;
+  const { numeroProcesso, tribunalAlias } = JSON.parse(event.body);
 
   const apiUrl = `https://api-publica.datajud.cnj.jus.br/${tribunalAlias}/_search`;
 
@@ -29,15 +28,17 @@ exports.handler = async function(event, context) {
       headers: headers,
       body: JSON.stringify(body)
     });
+
     const data = await response.json();
     return {
       statusCode: 200,
       body: JSON.stringify(data)
     };
   } catch (error) {
+    console.error('Erro na função Lambda:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Erro ao buscar o processo.' })
+      body: JSON.stringify({ error: 'Erro ao buscar o processo.', details: error.message })
     };
   }
-};
+}
