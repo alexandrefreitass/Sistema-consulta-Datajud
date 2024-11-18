@@ -8,45 +8,34 @@ import { tap, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DatajudService {
-  private apiKey = 'cDZHYzlZa0JadVREZDJCendQbXY6SkJlTzNjLV9TRENyQk1RdnFKZGRQdw=='; // Substitua <API Key> pela sua chave pública
-  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
   getProcesso(numeroProcesso: string, tribunalAlias: string): Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': `ApiKey ${this.apiKey}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json' 
     });
 
     const body = {
-      query: {
-        match: {
-          numeroProcesso: numeroProcesso
-        }
-      }
+      numeroProcesso: numeroProcesso, 
+      tribunalAlias: tribunalAlias 
     };
 
-    const apiUrl = `${this.apiUrl}/${tribunalAlias}/_search`;
-
-    // Log da URL e do corpo da requisição
-    console.log('Enviando requisição para:', apiUrl);
-    console.log('Corpo da requisição:', body);
+    // URL da função serverless no Netlify
+    const apiUrl = `${environment.apiUrl}/.netlify/functions/datajud-proxy`; 
 
     return this.http.post<any>(apiUrl, body, { headers: headers }).pipe(
       tap((response) => {
-        // Verificar se há resultados
         if (response.hits && response.hits.hits.length > 0) {
-          const processoData = response.hits.hits[0];  // Primeiro resultado (hit)
+          const processoData = response.hits.hits[0];
           console.log('Dados do processo:', processoData._source);
         } else {
           console.log('Nenhum processo encontrado.');
         }
       }),
       catchError((error) => {
-        // Log do erro
         console.error('Erro ao buscar o processo:', error);
-        return throwError(error);  // Re-emitir o erro para ser tratado posteriormente
+        return throwError(error); 
       })
     );
   }

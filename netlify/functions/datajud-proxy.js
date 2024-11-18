@@ -21,10 +21,10 @@ exports.handler = async function(event, context) {
 
   const requestBody = {
     query: {
-      match: {
-        numeroProcesso: numeroProcesso
-      }
-    }
+      term: {
+        numeroProcesso: numeroProcesso,
+      },
+    },
   };
 
   try {
