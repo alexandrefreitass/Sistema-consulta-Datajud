@@ -1,32 +1,79 @@
+# Sistema de Consulta - Datajud
 
-## Consumo de API - Datajud
-<br/>
 <div align="center">
-    <img src="https://github.com/user-attachments/assets/b464a97a-b174-4a17-a9f6-fec1bab55424" />
+  <img src="https://github.com/user-attachments/assets/b464a97a-b174-4a17-a9f6-fec1bab55424" alt="Logo do projeto Datajud" width="600">
 </div>
-<br/><br/>
 
-Este projeto é uma aplicação desenvolvida em Angular para consumir a API do Datajud, permitindo a interação e exibição de dados judiciais de forma eficiente e estruturada. O projeto integra a API do Datajud com funcionalidades de visualização e manipulação dos dados fornecidos pelos endpoints.
+<div align="center">
+  <img src="https://img.shields.io/badge/Angular-20-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular 20">
+  <img src="https://img.shields.io/badge/Node.js-Express-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js + Express">
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="MIT License">
+</div>
 
-### Características
+## 📜 Visão Geral
+Aplicação web moderna desenvolvida em **Angular** para consumir e exibir dados da API pública do **Datajud**. A interface permite a consulta de informações de processos judiciais de forma simples, rápida e eficiente.
 
-- **Consumo de API**: Integração direta com a API do Datajud.
-- **Visualização de Dados**: Exibe informações judiciais de forma organizada e acessível.
-- **Requisições HTTP**: Utilização de métodos GET e POST para manipulação de dados.
-- **Componentização**: Utilização de componentes Angular para modularidade e reutilização de código.
+Para garantir a segurança da chave de API e evitar sua exposição no frontend, a aplicação utiliza um **servidor proxy local em Node.js com Express**, que intermedia a comunicação com a API do Datajud, adicionando a chave de autenticação a cada requisição.
 
-### Funcionalidades
+---
 
-- **Consulta de Dados**: Permite realizar requisições para obter informações judiciais específicas.
-- **Filtragem**: Filtros aplicáveis para facilitar a busca e organização dos dados recebidos da API.
-- **Interface Responsiva**: Interface amigável e responsiva para facilitar o uso em diferentes dispositivos.
+## ✨ Tecnologias Utilizadas
+- **Frontend:**
+  - Angular 20
+  - TypeScript
+  - RxJS para programação reativa
+  - Sass para estilização
+  - Angular Material para componentes de UI
 
-### Endpoints e Consultas:
+- **Backend (Proxy Local):**
+  - Node.js
+  - Express.js
+  - Dotenv para gerenciamento seguro de variáveis de ambiente
 
-- Utilize a interface para realizar consultas específicas através da API.
-- O componente responsável pelo consumo de dados se encontra no serviço consumirapi.service.ts.
+---
 
+## 🚀 Como Executar Localmente
 
-### Licença
+Siga os passos abaixo para rodar o projeto na sua máquina.
 
-Este projeto está sob a licença MIT. Consulte o arquivo <a href="https://github.com/alexandrefreitass/consumo-api-datajud/blob/main/LICENSE">LICENSE</a> para obter mais detalhes.
+**Pré-requisitos:**
+* Node.js (versão 18 ou superior)
+* NPM ou outro gerenciador de pacotes
+
+### 1 · Clone o Repositório
+```
+git clone https://github.com/alexandrefreitass/Sistema-consulta-Datajud.git
+cd Sistema-consulta-Datajud
+```
+### 2 · Crie o Arquivo de Variáveis de Ambiente
+Crie um arquivo chamado `.env` na raiz do projeto e adicione sua chave da API do Datajud:
+```
+DATAJUD_API_KEY=SUA_CHAVE_DE_API_AQUI
+```
+### 3 · Instale as Dependências
+Este comando irá baixar todas as bibliotecas necessárias para o frontend e para o servidor proxy:
+```
+npm install
+```
+### 4 · Execute a Aplicação
+Como o projeto possui um frontend (Angular) e um backend (servidor proxy), você precisará de **dois terminais abertos** na pasta do projeto.
+
+* **No primeiro terminal, inicie o servidor proxy:**
+    ```
+    npm run start:proxy
+    ```
+    *Aguarde a mensagem: `Servidor proxy local rodando em http://localhost:3000`*
+
+* **No segundo terminal, inicie a aplicação Angular:**
+    ```
+    npm start
+    ```
+
+### 5 · Acesse no Navegador
+Após a compilação, a aplicação estará disponível em **[http://localhost:4200/](http://localhost:4200/)**.
+
+---
+
+## 📄 Licença
+
+Distribuído sob a licença **MIT**. Consulte o arquivo [LICENSE](https://github.com/alexandrefreitass/sistema-consulta-datajud/blob/main/LICENSE) para obter mais detalhes.
