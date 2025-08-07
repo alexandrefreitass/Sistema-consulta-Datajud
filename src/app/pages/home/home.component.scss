@@ -1,4 +1,4 @@
-@import "../../../color-variables.scss";
+@use "../../../color-variables.scss" as *;
 
 main {
     display: flex;

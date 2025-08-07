@@ -1,0 +1,508 @@
+// src/app/components/processo-consulta/processo-consulta.component.scss
+
+.processo-consulta {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.formulario-consulta {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  // Efeito subtle de hover
+  &:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
+  }
+
+  h2 {
+    margin-bottom: 24px;
+    color: #1a1a1a;
+    font-weight: 700;
+    font-size: 24px;
+    text-align: center;
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(45deg, #28a745, #20c997);
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+  }
+
+  .form-row {
+    margin-bottom: 20px;
+    position: relative;
+
+    // Animação nos campos de formulário
+    ::ng-deep .mat-mdc-form-field {
+      transition: all 0.3s ease;
+
+      &:focus-within {
+        transform: translateY(-2px);
+      }
+
+      .mat-mdc-text-field-wrapper {
+        transition: all 0.3s ease;
+      }
+
+      &.mat-focused .mdc-notched-outline {
+        border-color: #007bff !important;
+        border-width: 2px !important;
+      }
+    }
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  .form-actions {
+    margin-top: 24px;
+    text-align: center;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-consultar,
+  .btn-limpar {
+    min-width: 180px;
+    height: 48px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    
+    &:not(:disabled) {
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  .btn-consultar {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: white !important;
+    
+    span {
+      color: white !important;
+    }
+    
+    &:not(:disabled):hover {
+      background: linear-gradient(45deg, #0056b3, #004085);
+      
+      span {
+        color: white !important;
+      }
+    }
+  }
+
+  .btn-limpar {
+    color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    
+    span {
+      color: #dc3545 !important;
+    }
+    
+    &:not(:disabled):hover {
+      background-color: #dc3545 !important;
+      color: white !important;
+      
+      span {
+        color: white !important;
+      }
+    }
+  }
+}
+
+// Container de resultados - sempre presente para evitar layout shift
+.resultados-container {
+  min-height: 200px; // Reserva espaço mínimo
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+
+  &:not(.visible) {
+    min-height: 0;
+    opacity: 0;
+  }
+}
+
+.resultado-consulta,
+.no-result,
+.loading-state {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease-in-out;
+  max-height: 0;
+  overflow: hidden;
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: none;
+    overflow: visible;
+  }
+
+  &.hide {
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+    overflow: hidden;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  h3 {
+    margin-bottom: 20px;
+    color: #1a1a1a;
+    font-weight: 600;
+    font-size: 20px;
+  }
+}
+
+.processo-info {
+  margin-bottom: 32px;
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background: #fafafa;
+
+    label {
+      font-weight: 600;
+      color: #666;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    span {
+      color: #333;
+      font-size: 14px;
+    }
+  }
+}
+
+.movimentacoes {
+  h4 {
+    margin-bottom: 16px;
+    color: #1a1a1a;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+  }
+
+  .movimentos-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+
+    th {
+      background: #f8f9fa;
+      padding: 12px;
+      text-align: left;
+      font-weight: 700;
+      color: #1a1a1a;
+      border-bottom: 2px solid #e0e0e0;
+      font-size: 14px;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #e0e0e0;
+      vertical-align: top;
+
+      &:first-child {
+        white-space: nowrap;
+      }
+    }
+
+    tr:hover {
+      background: #f9f9f9;
+    }
+  }
+
+  .complementos-list {
+    margin: 0;
+    padding-left: 16px;
+
+    li {
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+  }
+
+  .sem-complementos {
+    color: #999;
+    font-style: italic;
+  }
+}
+
+.paginacao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding: 16px;
+  background: #f5f5f5;
+  border-radius: 4px;
+
+  .page-info {
+    color: #666;
+    font-size: 14px;
+  }
+}
+
+// Estados específicos
+.no-result {
+  text-align: center;
+  padding: 40px;
+
+  h3 {
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  p {
+    color: #999;
+    font-size: 14px;
+  }
+}
+
+.loading-state {
+  text-align: center;
+  padding: 40px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #007bff, transparent);
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  .loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    h3 {
+      color: #1a1a1a;
+      font-size: 18px;
+      margin-bottom: 4px;
+      font-weight: 600;
+      animation: pulse 1.5s ease-in-out infinite alternate;
+    }
+
+    p {
+      color: #666;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  }
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(0, 123, 255, 0.1);
+    border-top: 4px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      right: 2px;
+      bottom: 2px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top: 2px solid rgba(0, 123, 255, 0.3);
+      animation: spin 0.8s linear infinite reverse;
+    }
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+// Animações de entrada suaves
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .processo-consulta {
+    padding: 16px;
+  }
+
+  .formulario-consulta,
+  .resultado-consulta,
+  .no-result,
+  .loading-state {
+    padding: 16px;
+  }
+
+  .resultados-container {
+    min-height: 150px; // Reduz espaço mínimo em mobile
+
+    &:not(.visible) {
+      min-height: 0;
+    }
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .movimentos-table {
+    font-size: 12px;
+
+    th,
+    td {
+      padding: 8px;
+    }
+  }
+
+  .paginacao {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .loading-state .spinner {
+    width: 35px;
+    height: 35px;
+    border-width: 3px;
+
+    &::after {
+      border-width: 2px;
+    }
+  }
+
+  .formulario-consulta {
+    padding: 20px;
+    border-radius: 8px;
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #1a1a1a;
+      font-weight: 700;
+    }
+
+    .btn-consultar,
+    .btn-limpar {
+      min-width: 160px;
+      height: 44px;
+      font-size: 13px;
+      
+      span {
+        color: inherit !important;
+      }
+    }
+
+    .btn-consultar span {
+      color: white !important;
+    }
+
+    .btn-limpar span {
+      color: #dc3545 !important;
+      
+      &:hover {
+        color: white !important;
+      }
+    }
+
+    .form-actions {
+      gap: 12px;
+    }
+  }
+}

@@ -1,9 +1,0 @@
-[build]
-  publish = "dist/apitribunal/browser"
-  functions = "netlify/functions"
-
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/datajud-proxy"
-  status = 200
-  force = true
